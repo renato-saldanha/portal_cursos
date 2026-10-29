@@ -1,4 +1,4 @@
-# Guia de Testes - StrataSec
+# Guia de Testes - Portal de Cursos
 
 Este documento descreve como executar e manter os testes do projeto.
 

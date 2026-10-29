@@ -1,8 +1,8 @@
 const LOGINS_DEMO = [
-  'admin@demo.stratasec.example',
-  'ana.souza@demo.stratasec.example',
-  'bruno.lima@demo.stratasec.example',
-  'carla.menezes@demo.stratasec.example',
+  'admin@demo.example',
+  'ana.souza@demo.example',
+  'bruno.lima@demo.example',
+  'carla.menezes@demo.example',
 ];
 
 const DemoBanner = () => {

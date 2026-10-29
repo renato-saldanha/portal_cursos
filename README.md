@@ -1,4 +1,4 @@
-# 🎨 StrataSec Frontend - Next.js React
+# 🎨 Portal de Cursos - Frontend - Next.js React
 
 Interface de usuário moderna e responsiva para o sistema de gerenciamento de treinamentos com autenticação em duas etapas (2FA) e player de vídeo integrado.
 
@@ -411,7 +411,7 @@ Variáveis do projeto Vercel do front:
 | `BACKEND_URL` | Destino do rewrite de `/api` (URL do backend) |
 | `NEXT_PUBLIC_DEMO` | `1` exibe a faixa "Modo demonstração" e o aviso de upload desativado (padrão desligado) |
 
-Logins de demonstração (o código de verificação aparece na própria tela de verificação): `admin@demo.stratasec.example` (administrador) e os alunos `ana.souza@`, `bruno.lima@` e `carla.menezes@demo.stratasec.example`.
+Logins de demonstração (o código de verificação aparece na própria tela de verificação): `admin@demo.example` (administrador) e os alunos `ana.souza@`, `bruno.lima@` e `carla.menezes@demo.example`.
 
 Limitações: o upload de arquivos fica desativado (disco efêmero e limite de cerca de 4,5 MB por requisição); os recursos de exemplo já vêm no backend. Qualquer visitante pode alterar os dados da demonstração.
 
@@ -518,7 +518,7 @@ sudo npm install -g pm2
 #### 3. Build e Deploy
 ```bash
 npm run build
-pm2 start npm --name "stratasec-frontend" -- start
+pm2 start npm --name "portal-cursos-frontend" -- start
 pm2 save
 pm2 startup
 ```
@@ -589,4 +589,3 @@ Para dúvidas ou problemas:
 
 ---
 
-**Desenvolvido com ❤️ para StrataSec**
