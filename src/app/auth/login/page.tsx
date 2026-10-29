@@ -9,7 +9,7 @@ import { MarketingBackground } from '@/components/ui/MarketingBackground';
 import { validar_email } from '@/utils/utils';
 import { useAutenticacao } from '@/lib/hooks/useApi';
 import { CodigoVerificacaoResponse, LoginData } from '@/types';
-import { TEMP_EMAIL } from '@/utils/Const';
+import { CODIGO_DEMO, TEMP_EMAIL } from '@/utils/Const';
 
 export default function PaginaLogin() {
   const [verificando, setVerificando] = useState(false);
@@ -52,6 +52,7 @@ export default function PaginaLogin() {
         setVerificando(false);
       } else {
         sessionStorage.setItem(TEMP_EMAIL, dadosLogin.email);
+        if (resultado.codigo_demo) sessionStorage.setItem(CODIGO_DEMO, resultado.codigo_demo);
         router.push('/auth/codigo');        
       }
     } catch (error) {

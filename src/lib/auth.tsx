@@ -41,7 +41,7 @@ export const authService = {
 
             if (!emailUsuarioSalvo) return null;
 
-            const response = await api.get<UsuarioResponse>(`/auth/usuario/${emailUsuarioSalvo}`);
+            const response = await api.get<UsuarioResponse>(`/auth/usuario/${emailUsuarioSalvo}/`);
 
             const usuario = response.data.usuario;
 
@@ -144,8 +144,8 @@ export const authService = {
     async enviarCodigoVerificacao(data: LoginData): Promise<CodigoVerificacaoResponse> {
         return api.post<CodigoVerificacaoResponse>('/auth/enviar-codigo/', data)
             .then(e => {
-                const { sucesso, expira_em, mensagem } = e.data;
-                return { sucesso, expira_em, mensagem };
+                const { sucesso, expira_em, mensagem, codigo_demo } = e.data;
+                return { sucesso, expira_em, mensagem, codigo_demo };
             })
             .catch(e => {
                 const msg = `Houve um erro ao enviar o codigo de verificação: ${e}`;
@@ -157,8 +157,8 @@ export const authService = {
     async reenviarCodigo(data: LoginData): Promise<CodigoVerificacaoResponse> {
         try {
             const response = await api.post('/auth/reenviar-codigo/', data);
-            const { sucesso, expira_em, mensagem } = response.data || {};
-            return { sucesso, expira_em, mensagem };
+            const { sucesso, expira_em, mensagem, codigo_demo } = response.data || {};
+            return { sucesso, expira_em, mensagem, codigo_demo };
         } catch (error: unknown) {
             const axiosError = error as { response?: { data?: { mensagem?: string }; status?: number } };
             return {

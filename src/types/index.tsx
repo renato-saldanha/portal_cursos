@@ -77,6 +77,7 @@ export interface CodigoVerificacaoResponse {
     sucesso: boolean;
     mensagem: string;
     expira_em: string;
+    codigo_demo?: string;
 }
 
 export interface EmailValidacaoResponse {

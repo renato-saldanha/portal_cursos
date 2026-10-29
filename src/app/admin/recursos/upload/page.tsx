@@ -52,6 +52,12 @@ export default function UploadRecurso() {
           </p>
         </div>
 
+        {process.env.NEXT_PUBLIC_DEMO === '1' && (
+          <div className="mb-6 p-3 sm:p-4 bg-yellow-50 border border-yellow-300 rounded-lg text-sm text-yellow-900">
+            Upload de arquivos desativado na demonstração.
+          </div>
+        )}
+
         {/* Seletor de tipo */}
         <div className="mb-6">
           <label className="label-md text-orange-base mb-3 block">

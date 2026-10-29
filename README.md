@@ -108,11 +108,7 @@ NEXT_PUBLIC_BASE_URL=http://localhost:3000
 ```
 
 ### Configuração da API
-A URL da API é configurada automaticamente através da variável `NEXT_PUBLIC_API_URL`. Se necessário, edite o arquivo `src/lib/api.tsx`:
-
-```typescript
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000/api';
-```
+O front chama a API na mesma origem (`/api`) e o Next encaminha as requisições para o backend (rewrite em `next.config.ts`). O destino é definido pela variável `BACKEND_URL` (padrão `http://localhost:8000`).
 
 **Importante:** Certifique-se de que o backend está rodando antes de iniciar o frontend.
 
@@ -401,6 +397,24 @@ npm run build
 npm run start
 ```
 
+### Demo na Vercel
+
+Demonstração pública com dados fictícios, em plano gratuito:
+
+- Front: https://portal-cursos-ashen.vercel.app
+- Backend (Django + Postgres Neon): https://portal-cursos-api.vercel.app (veja o README do backend)
+
+Variáveis do projeto Vercel do front:
+
+| Variável | Uso |
+|----------|-----|
+| `BACKEND_URL` | Destino do rewrite de `/api` (URL do backend) |
+| `NEXT_PUBLIC_DEMO` | `1` exibe a faixa "Modo demonstração" e o aviso de upload desativado (padrão desligado) |
+
+Logins de demonstração (o código de verificação aparece na própria tela de verificação): `admin@demo.stratasec.example` (administrador) e os alunos `ana.souza@`, `bruno.lima@` e `carla.menezes@demo.stratasec.example`.
+
+Limitações: o upload de arquivos fica desativado (disco efêmero e limite de cerca de 4,5 MB por requisição); os recursos de exemplo já vêm no backend. Qualquer visitante pode alterar os dados da demonstração.
+
 ### Deploy em Vercel (Recomendado)
 
 #### 1. Instalar Vercel CLI
@@ -419,8 +433,7 @@ vercel --prod
 
 #### 3. Configurar Variáveis de Ambiente
 No painel da Vercel, adicione:
-- `NEXT_PUBLIC_API_URL`: URL da sua API (ex: `https://api.seudominio.com/api`)
-- `NEXT_PUBLIC_BASE_URL`: URL do frontend (ex: `https://seudominio.com`)
+- `BACKEND_URL`: URL do backend (ex: `https://api.seudominio.com`), sem `/api` no final
 
 ### Deploy em Netlify
 

@@ -7,7 +7,7 @@ import Button from '../../../components/Button';
 import { ArrowLeft, VideoIcon } from 'lucide-react';
 import { MarketingBackground } from '@/components/ui/MarketingBackground';
 import { useAutenticacao } from '@/lib/hooks/useApi';
-import { TEMP_EMAIL } from '@/utils/Const';
+import { CODIGO_DEMO, TEMP_EMAIL } from '@/utils/Const';
 import { AdmResponse, LoginData } from '@/types';
 
 export default function PaginaCodigo() {
@@ -18,6 +18,7 @@ export default function PaginaCodigo() {
   const [estadoVerificando, setEstadoVerificando] = useState(false);
   const [tempoRestante, setTempoRestante] = useState(0);
   const [emailCarregado, setEmailCarregado] = useState(false);
+  const [codigoDemo, setCodigoDemo] = useState('');
 
   const router = useRouter();
   const { verificarCodigo, reenviarCodigo, carregandoEstado, erroEstado, limparErro, isAdm } = useAutenticacao();
@@ -29,6 +30,7 @@ export default function PaginaCodigo() {
     if (emailSalvo) {
       Promise.resolve().then(() => {
         setEmail(emailSalvo);
+        setCodigoDemo(sessionStorage.getItem(CODIGO_DEMO) || '');
         setEmailCarregado(true);
       });
     } else {
@@ -45,6 +47,7 @@ export default function PaginaCodigo() {
 
   const handleVoltarLogin = () => {
     sessionStorage.removeItem(TEMP_EMAIL);
+    sessionStorage.removeItem(CODIGO_DEMO);
     router.push('/auth/login');
   }
 
@@ -59,6 +62,7 @@ export default function PaginaCodigo() {
 
       if (resultado) {
         sessionStorage.removeItem(TEMP_EMAIL);
+        sessionStorage.removeItem(CODIGO_DEMO);
 
         const response = await isAdm(email);
 
@@ -87,6 +91,10 @@ export default function PaginaCodigo() {
       const resultado = await reenviarCodigo(loginData);
 
       if (resultado && resultado.sucesso) {
+        if (resultado.codigo_demo) {
+          sessionStorage.setItem(CODIGO_DEMO, resultado.codigo_demo);
+          setCodigoDemo(resultado.codigo_demo);
+        }
         setTempoRestante(60);
         setErro('');
       } else {
@@ -135,6 +143,14 @@ export default function PaginaCodigo() {
               <strong className="text-orange-base break-all">{email}</strong>
             </p>
           </div>
+
+          {codigoDemo && (
+            <div className="mb-6 p-3 bg-orange-50 rounded-lg text-center">
+              <p className="body-sm text-gray-500">
+                Modo demonstração: seu código é <strong className="font-mono tracking-widest text-black">{codigoDemo}</strong>
+              </p>
+            </div>
+          )}
 
           <form onSubmit={handleSubmit} className="space-y-6">
             <div>

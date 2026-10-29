@@ -46,7 +46,9 @@ export const ProtecaoRota = ({ children }: ProtecaoRotaProps) => {
                     return;
                 }
 
-                router.push('/admin');
+                if (!pathname.startsWith('/admin')) {
+                    router.push('/admin');
+                }
             } catch {
                 router.push('/auth/login/');
             } finally {

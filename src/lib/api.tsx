@@ -1,7 +1,8 @@
 import axios from "axios";
 import { TOKEN_ACESSO, TOKEN_ATUALIZACAO } from "../utils/Const";
 
-const API_BASE_URL = 'http://localhost:8000/api';
+// Mesma origem: o Next encaminha /api para o backend (ver next.config.ts)
+const API_BASE_URL = '/api';
 
 export const api = axios.create({
     baseURL: API_BASE_URL,

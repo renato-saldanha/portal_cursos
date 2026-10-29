@@ -4,6 +4,7 @@ import Script from 'next/script';
 import './globals.css';
 import { ProtecaoRota } from '@/components/ProtecaoRota';
 import ToastContainer from '@/components/ToastContainer';
+import DemoBanner from '@/components/DemoBanner';
 
 const dmSans = DM_Sans({
   subsets: ['latin'],
@@ -44,6 +45,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${dmSans.variable} ${poppins.variable} `}>
         <ProtecaoRota>
+          <DemoBanner />
           <div
             className="min-h-screen bg-cover bg-center bg-no-repeat"
             style={{ backgroundImage: 'url(/background.jpg)' }}
